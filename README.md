@@ -224,17 +224,17 @@ In separate terminals, execute the following commands:
 
 1. Run ORB SLAM3 and publish topics:
     ```bash
-    ros2 run orbslam3_pose mono /home/rasp7/ORB_SLAM3/Vocabulary /ORBvoc.txt /home/rasp7/ORB_SLAM3/Examples/RGB-D/TUM1.yaml /dev/video0
+    ros2 run orbslam3_pose mono /home/rasp7/ORB_SLAM3/Vocabulary/ORBvoc.txt /home/rasp7/ORB_SLAM3/Examples/Monocular/TUM1.yaml --ros-args -r __ns:=/ -r /anafi/camera/image:=/camera
     ```
 
 2. Run the camera:
     ```bash
-    ros2 launch image_publisher image_publisher.launch.py
+    ros2 run opencv_tools image_publisher
     ```
 
 3. Launch RViz2 for visualization:
     ```bash
     export XDG_SESSION_TYPE=x11 
-    ros2 launch orbslam3_pose rviz.launch.py
+    ros2 run rviz2 rviz2
     ```
 
