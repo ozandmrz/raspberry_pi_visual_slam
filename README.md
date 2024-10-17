@@ -236,6 +236,7 @@ In separate terminals, execute the following commands:
 
 3. Launch RViz2 for visualization:
     ```bash
+    export XDG_SESSION_TYPE=x11 
     ros2 launch orbslam3_pose rviz.launch.py
     ```
 
