@@ -224,9 +224,7 @@ In separate terminals, execute the following commands:
 
 1. Run ORB SLAM3 and publish topics:
     ```bash
-    ros2 run orbslam3_pose mono /home/rasp7/ORB_SLAM3/Vocabulary
-
-/ORBvoc.txt /home/rasp7/ORB_SLAM3/Examples/RGB-D/TUM1.yaml /dev/video0
+    ros2 run orbslam3_pose mono /home/rasp7/ORB_SLAM3/Vocabulary /ORBvoc.txt /home/rasp7/ORB_SLAM3/Examples/RGB-D/TUM1.yaml /dev/video0
     ```
 
 2. Run the camera:
