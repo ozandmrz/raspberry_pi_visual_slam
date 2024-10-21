@@ -190,7 +190,6 @@ source ~/.bashrc
 
 ## Sourcing the Installations
 ```bash
-echo 'export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:/opt/ros/humble' >> ~/.bashrc
 echo 'export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:~/ORB_SLAM3:~/ORB_SLAM3/Thirdparty/Sophus' >> ~/.bashrc
 echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/ORB_SLAM3/lib' >> ~/.bashrc
 echo "source ~/ros2_humble/install/local_setup.bash" >> ~/.bashrc
