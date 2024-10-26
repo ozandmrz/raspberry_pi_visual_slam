@@ -41,6 +41,7 @@ echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 
 ## Installing ROS2 Humble
 Since ROS2 Humble cannot be directly installed on Debian 12, use the following repository (approx. 3-hour process):
+*Direct installation of ROS2 on a Raspberry Pi is not possible; it must be built from source. However, manually installing it with all necessary packages can be challenging. To address this, a discussion and solution are provided at [this forum link](https://forums.raspberrypi.com/viewtopic.php?t=361746). To ensure the solution remains available even if the post is removed, this repository includes an `.sh` script for a reliable and more straightforward installation.*
 
 1. Clone the repository to your Raspberry Pi 5:
     ```bash
@@ -90,6 +91,7 @@ sudo apt install libopencv-dev python3-opencv
 
 ## GCC Version Downgrade
 To install ORB SLAM3 and Sophus correctly, downgrade GCC from version 12 to 11:
+*On Raspberry Pi 5, the default GCC version is 12; however, ORB-SLAM recommends using version 11. Using GCC 12, especially during the Sophus installation, can lead to errors. Therefore, switching to GCC version 11 is necessary for a stable installation.*
 ```bash
 sudo apt-get update
 sudo apt-get install gcc-11 g++-11
@@ -102,6 +104,8 @@ Verify the version change:
 ```bash
 gcc --version
 ```
+
+***The project requirements and repositories for ORB-SLAM3 are based on the original project at [this source](https://github.com/UZ-SLAMLab/ORB_SLAM3). However, certain topics, such as position and keyframe, are not shared globally. For this reason, a fork has been created with necessary adjustments, modifying the project code to allow sharing of these topics. If these topics are not needed, installation can proceed directly from the original source. However, it is recommended to install from the modified fork using the instructions below to leverage these additional features.***
 
 ## Installing Required Libraries
 ```bash
@@ -177,6 +181,7 @@ make -j4
 ```
 
 ## Publishing ORB SLAM3 Data in ROS2
+*The primary source for this project is [this repository](https://github.com/astronaut71/orb_slam3_ros2), though numerous modifications have been made. The fork focuses exclusively on monocular camera support with additional enhancements. Unlike the original repository, which provides only pose information, this fork publishes all relevant ORB-SLAM3 data—such as pose, keyframe, image, and marker—as ROS topics.*
 ```bash
 mkdir -p ~/ros2_pose/src
 cd ~/ros2_pose/src
@@ -200,6 +205,8 @@ source ~/.bashrc
 ```
 
 ## Image Publisher Setup
+*It is an entirely custom-written repository, providing one of many possible methods to publish images as a ROS2 topic. Other alternative methods for sharing the image as a ROS2 topic may also be used if desired.*
+
 ```bash
 mkdir -p ~/image_publisher/src
 cd ~/image_publisher/src
@@ -237,3 +244,9 @@ In separate terminals, execute the following commands:
     ros2 run rviz2 rviz2
     ```
 
+***To save the current map and run ORB-SLAM3 from a saved map, the following should be added to the launch file:***
+
+`System.LoadAtlasFromFile: "./yourdirectory/atlas"`  
+`System.SaveAtlasToFile: "./yourdirectory/atlas"`  
+
+For more detailed information, please refer to [this resource](https://matom.ai/insights/slam/).
