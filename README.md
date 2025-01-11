@@ -131,6 +131,35 @@ cd ~/my_ros2_workspace
 colcon build --symlink-install
 ```
 
+### If an error occurs after this step:
+
+If you encounter errors after following the above instructions, try the following:
+
+1. **Source the ROS setup script**: To properly configure the environment, source the `local_setup.sh` script:
+
+   ```bash
+   source ~/my_ros2_workspace/install/local_setup.sh
+   ```
+
+   Make sure to add this line to your `.bashrc` file for future sessions.
+
+2. **Install missing dependencies**:
+
+   Run:
+   ```bash
+   rosdep install --from-paths src --ignore-src -r -y
+   ```
+
+3. **Remove conflicting libraries**: If you still face issues related to `libcv-bridge-dev` or similar libraries, try removing them:
+
+   ```bash
+   sudo apt remove libcv-bridge-dev
+   sudo apt autoremove
+   ```
+
+After performing these steps, try building the workspace again. This should resolve common issues related to missing or conflicting dependencies.
+
+
 ## Installing Pangolin
 ```bash
 cd ~
